@@ -3,29 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@mui/material": "^5.6.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "browser-sync": "^2.27.5",
-    "gulp-autoprefixer": "^8.0.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
     "gulp-sass": "^5.0.0",
-    "gulp-sourcemaps": "^3.0.0",
+    "gulplog": "^1.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "sass": "^1.42.1",
+    "sass": "^1.50.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sass": "sass src/Sass:src/Css --watch --no-source-map"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +51,10 @@
     ]
   },
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "node-sass": "^7.0.1",
+    "sass-loader": "^12.6.0",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-sourcemaps": "^3.0.0"
   }
 }
