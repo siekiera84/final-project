@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";
 import './App.scss';
-import PokemonList from "./PokemonList";
 import axios from "axios";
+import PokemonList from "./PokemonList";
 import Pagination from "./Pagination";
 
 
