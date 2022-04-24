@@ -15,8 +15,6 @@ const Card = styled.div`
     &:hover{
       box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) ;
     }
-    -moz-user-select: none;
-    user-select: none;
 `
 
 const StyledLink = styled(Link)`
@@ -58,7 +56,7 @@ export default class PokemonCard extends Component {
 
         return (
             <div className='col-md-3 col-sm-6 mb-5'>
-                <StyledLink to={`pokemon/${this.state.pokemonIndex}`}>
+                <StyledLink to={`/pokemon/${this.state.pokemonIndex}`}>
                     <Card className="card">
                         <h5 className="card-header">{this.state.pokemonIndex}</h5>
                         {this.state.imageLoading ? (
