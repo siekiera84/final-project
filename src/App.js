@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react";
 import './App.css';
 import {getAllPokemon, getPokemon} from "./services/pokemon";
 import Card from "./components/Card/Card";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 
 
 
@@ -24,6 +24,25 @@ function App() {
         fetchData();
     },[])
 
+    const next = async () =>{
+        setLoading(true)
+        let data = await  getAllPokemon(nextPageUrl)
+        await loadingPokemon(data.results)
+        setNextPageUrl(data.next)
+        setPrevPageUrl(data.previous)
+        setLoading(false)
+    }
+
+    const prev = async () =>{
+        if(!prevPageUrl) return
+        setLoading(true)
+        let data = await  getAllPokemon(prevPageUrl)
+        await loadingPokemon(data.results)
+        setNextPageUrl(data.next)
+        setPrevPageUrl(data.previous)
+        setLoading(false)
+    }
+
     const loadingPokemon = async (data) =>{
         let _pokemonData = await Promise.all(data.map(async pokemon =>{
             let pokemonRecord = await getPokemon(pokemon.url);
@@ -40,6 +59,10 @@ function App() {
             {loading ? <h1>Loading...</h1> : (
                 <>
                     <NavBar/>
+                    <div className="btn">
+                        <button onClick={prev}>Prev</button>
+                        <button onClick={next}>Next</button>
+                    </div>
                     <div className="grid-container">
                         {pokemonData.map((pokemon,i)=>{
                             return <Card key={i} pokemon={pokemon}/>

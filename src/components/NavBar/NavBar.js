@@ -1,11 +1,13 @@
 import React from 'react';
-import './style.css'
+import './NavBar.css'
 
 function NavBar(){
     return(
-        <div>
-            POKEMON API
+        <>
+        <div className="NavBar">
+            POKEDEX
         </div>
+        </>
     )
 }
 
