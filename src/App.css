@@ -6,7 +6,7 @@
     width: 70%;
     display: grid;
     margin: 0 auto;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 10px;
 }
 
@@ -24,4 +24,8 @@
     background: #738c83;
     color: #fff;
     font-size: 1em;
+}
+
+.btn button:hover{
+    cursor: pointer;
 }

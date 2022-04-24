@@ -8,6 +8,17 @@ p {
     border: 2px solid black;
 }
 
+.Card:hover{
+    font-size: 0;
+}
+
+.Card:hover:after{
+    content: attr(data-hover);
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 200;
+}
+
 .Card__img {
     text-align: center;
 }

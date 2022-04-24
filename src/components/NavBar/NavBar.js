@@ -5,7 +5,7 @@ function NavBar(){
     return(
         <>
         <div className="NavBar">
-            POKEDEX
+            POKEMON HUB
         </div>
         </>
     )

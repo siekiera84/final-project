@@ -49,6 +49,7 @@ function App() {
             return pokemonRecord
         }))
         setPokemonData(_pokemonData)
+
     }
 
 
@@ -65,7 +66,12 @@ function App() {
                     </div>
                     <div className="grid-container">
                         {pokemonData.map((pokemon,i)=>{
-                            return <Card key={i} pokemon={pokemon}/>
+                            return (
+                                <Card className="Card__front"
+                                      data-hover="Card__back"
+                                      key={i}
+                                      pokemon={pokemon}/>
+                            )
                         })}
                     </div>
                 </>
