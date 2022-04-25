@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import NavBar from "./components/layout/NavBar";
+import NavBar from "./components/layout/NavBar"; //import navbara
 import Dashboard from "./components/layout/Dashboard";
 import Pokemon from "./components/pokemon/Pokemon";
 
