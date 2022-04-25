@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 
+//tabela z kolorami typów pokemonów
 const TYPE_COLORS = {
     bug: 'B1C12E',
     dark: '4F3A2D',
@@ -23,6 +24,8 @@ const TYPE_COLORS = {
 };
 
 export default class Pokemon extends Component {
+
+    //stan początkowy
     state = {
         name: '',
         pokemonIndex: '',
@@ -57,11 +60,16 @@ export default class Pokemon extends Component {
         //zbieranie informacji o pokemonach
         const pokemonRes = await axios.get(pokemonUrl);
 
+        //imię pokemona
         const name = pokemonRes.data.name;
+
+        //zdjęcie pokemona
         const imageUrl = pokemonRes.data.sprites.front_default;
+
 
         let{hp,attack,defense,speed,specialAttack,specialDefense} = '';
 
+        //zbieranie statystyk pokemonów ze stats
         pokemonRes.data.stats.map(stat=>{
             switch(stat.stat.name){
                 case 'hp':
@@ -85,15 +93,21 @@ export default class Pokemon extends Component {
             }
         })
 
+        //zmiana na kilogramy i metry
         const height = pokemonRes.data.height / 10;
         const weight = pokemonRes.data.weight / 10;
+
+        //typy pokemonów
         const types = pokemonRes.data.types.map(type =>
             type.type.name
         )
+
+        //umiejętności
         const abilities = pokemonRes.data.abilities.map(ability=>{
             return ability.ability.name.toLowerCase().split('-').map(s => s.charAt(0).toUpperCase() + s.substring(1)).join(" ")
         }).join(", ")
 
+        //filtrowanie dodatkowych umiejętności które nie są 0
         const evs = pokemonRes.data.stats.filter(stat =>{
             if(stat.effort > 0){
                 return true;
@@ -103,7 +117,8 @@ export default class Pokemon extends Component {
             return `${stat.effort} ${stat.stat.name.toLowerCase().split('-').map(s => s.charAt(0).toUpperCase() + s.substring(1)).join(" ")}`
         }).join(", ")
 
-        //opis pokemona, catch rate, egg groups, gender ratio, hatch steps
+        //zbieranie opisu pokemona, catch rate, egg groups, gender ratio, hatch steps
+        //zbieranie tekstu tylko po angielsku
         await axios.get(pokemonSpeciesUrl).then(res =>{
             let description = '';
             res.data.flavor_text_entries.some(flavor=>{
@@ -113,12 +128,19 @@ export default class Pokemon extends Component {
                 }
             })
 
+            //zbieranie numeru o płci
             const femaleRate = res.data['gender_rate'];
+
+            //przeliczanie szansy na samice
             const genderRatioFemale = 12.5 * femaleRate;
+
+            //przeliczanie szansy na samca
             const genderRatioMale = 12.5 * (8 - femaleRate);
 
+            //szansa na złapanie z dokumentacji
             const catchRate = Math.round((100/255)* res.data['capture_rate'])
 
+            //rodzaje jajek
             const eggGroups = res.data['egg_groups']
                 .map(group => {
                     return group.name
@@ -129,8 +151,10 @@ export default class Pokemon extends Component {
                 })
                 .join(', ');
 
+            //ilość kroków do wyklucia z dokumentacji
             const hatchSteps = 255 * (res.data["hatch_counter"]+1);
 
+            //ustawianie stanu
             this.setState({
                 description,
                 genderRatioFemale,
@@ -141,6 +165,7 @@ export default class Pokemon extends Component {
             })
         })
 
+        //ustawianie stanu
         this.setState({
             imageUrl,
             pokemonIndex,
@@ -161,6 +186,7 @@ export default class Pokemon extends Component {
         })
     }
 
+    //stylowanie osobistej karty
     render() {
         return (
             <div className="col">
@@ -168,7 +194,7 @@ export default class Pokemon extends Component {
                     <div className="card-header">
                         <div className="row">
                             <div className="col-5">
-                                <h5>{this.state.pokemonIndex}</h5>
+                                <h5>#{this.state.pokemonIndex}</h5>
                             </div>
                             <div className="col-7">
                                 <div className="float-end">

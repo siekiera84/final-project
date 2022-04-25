@@ -1,3 +1,4 @@
+/*stylowanie storny*/
 .App{
     background-attachment: fixed;
     background-position: center;
@@ -7,7 +8,7 @@
     min-height: 100vh;
 }
 
-
+/* nadanie koloru navbara, !important żeby nadpisać styl z bootstrapa */
 .navbar{
     background-color: #ef5350 !important;
 }

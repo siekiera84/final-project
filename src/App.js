@@ -1,11 +1,10 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css' //importowanie bootstrap css
 import './App.css';
-import NavBar from "./components/layout/NavBar"; //import navbara
+import NavBar from "./components/layout/NavBar";
 import Dashboard from "./components/layout/Dashboard";
 import Pokemon from "./components/pokemon/Pokemon";
-
 import backgroundImage from "./components/pokemon/pattern.png";
 
 

@@ -1,34 +1,36 @@
 import React, {Component} from 'react';
 import PokemonCard from "./PokemonCard";
-import axios from "axios";
+import axios from "axios"; //do używania requestów
 
 export default class PokemonList extends Component {
+
 
     state={
         url:"https://pokeapi.co/api/v2/pokemon?limit=898&offset=0",
         pokemon:null
     }
 
+    //asynchroniczna żeby mogło działać w tle
     async componentDidMount() {
-        const res = await axios.get(this.state.url)
-        this.setState({pokemon: res.data['results']})
+        const res = await axios.get(this.state.url) //await czeka aż się załaduje
+        this.setState({pokemon: res.data['results']}) //rerenderowanie
     }
 
     render() {
         return (
             <>
-                {this.state.pokemon ? (
+                {this.state.pokemon ? ( //sprawdzamy czy już istnieje
                     <div className="row">
                         {this.state.pokemon.map(pokemon =>(
                             <PokemonCard
-                                key={pokemon.name}
+                                key={pokemon.name}  //musimy używać klucza, każdy pokemon ma unikatowe imię
                                 name={pokemon.name}
                                 url={pokemon.url}
                             />
                         ))}
                     </div>
                 ) : (
-                    <h1>Loading Pokemon...</h1>
+                    <h1>Loading Pokemon...</h1> //jeśli nie to ładujemy stronę
                 )}
             </>
         );
