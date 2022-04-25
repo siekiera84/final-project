@@ -4,8 +4,8 @@ import spinner from './spinner.gif';
 import {Link} from 'react-router-dom';
 
 const Sprite = styled.img`
-    width: 11em;
-    height: 11em;
+    width: 8em;
+    height: 8em;
     display: none;
 `
 
@@ -60,7 +60,7 @@ export default class PokemonCard extends Component {
                     <Card className="card">
                         <h5 className="card-header">{this.state.pokemonIndex}</h5>
                         {this.state.imageLoading ? (
-                            <img src={spinner} style={{width: '11em',height: '11em' }} className="card-img-top rounded mx-auto d-block mt-2"/>
+                            <img src={spinner} style={{width: '8em',height: '8em' }} className="card-img-top rounded mx-auto d-block mt-2"/>
                         ) : null}
                         <Sprite className="card-img-top rounded mx-auto mt-2"
                                 onLoad={() => this.setState({imageLoading: false})}

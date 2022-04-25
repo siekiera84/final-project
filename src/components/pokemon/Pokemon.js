@@ -85,22 +85,23 @@ export default class Pokemon extends Component {
             }
         })
 
-        const height = Math.round((pokemonRes.data.height + 0.0001) * 100 ) / 100;
-        const weight = Math.round((pokemonRes.data.weight + 0.0001) * 100 ) / 100;
+        const height = pokemonRes.data.height / 10;
+        const weight = pokemonRes.data.weight / 10;
         const types = pokemonRes.data.types.map(type =>
             type.type.name
         )
         const abilities = pokemonRes.data.abilities.map(ability=>{
             return ability.ability.name.toLowerCase().split('-').map(s => s.charAt(0).toUpperCase() + s.substring(1)).join(" ")
-        })
+        }).join(", ")
+
         const evs = pokemonRes.data.stats.filter(stat =>{
             if(stat.effort > 0){
                 return true;
             }
             return false
         }).map(stat=>{
-            return `${stat.effort} ${stat.stat.name}`.toLowerCase().split('-').map(s => s.charAt(0).toUpperCase() + s.substring(1)).join(" ")
-        }).join(', ')
+            return `${stat.effort} ${stat.stat.name.toLowerCase().split('-').map(s => s.charAt(0).toUpperCase() + s.substring(1)).join(" ")}`
+        }).join(", ")
 
         //opis pokemona, catch rate, egg groups, gender ratio, hatch steps
         await axios.get(pokemonSpeciesUrl).then(res =>{
@@ -118,9 +119,15 @@ export default class Pokemon extends Component {
 
             const catchRate = Math.round((100/255)* res.data['capture_rate'])
 
-            const eggGroups = res.data['egg_groups'].map(group=>{
-                return group.name.toLowerCase().split(' ').map(s => s.charAt(0).toUpperCase() +s.substring(1)).join(' ')
-            }).join(", ");
+            const eggGroups = res.data['egg_groups']
+                .map(group => {
+                    return group.name
+                        .toLowerCase()
+                        .split(' ')
+                        .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join(' ');
+                })
+                .join(', ');
 
             const hatchSteps = 255 * (res.data["hatch_counter"]+1);
 
@@ -300,6 +307,109 @@ export default class Pokemon extends Component {
                         </div>
                     </div>
                     <hr/>
+                    <div className="card-body">
+                        <h5 className="card-title text-center">Profile</h5>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <h6 className="float-end">Height:</h6>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <h6 className="float-start">{this.state.height} m</h6>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <h6 className="float-end">Weight:</h6>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <h6 className="float-start">{this.state.weight} kg</h6>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <h6 className="float-end">Catch Rate:</h6>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <h6 className="float-start">{this.state.catchRate}%</h6>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <h6 className="float-end">Gender Ratio:</h6>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="progress">
+                                            <div className="progress-bar"
+                                                 role="progressbar"
+                                                 style={{
+                                                     width: `${this.state.genderRatioFemale}%`,
+                                                     backgroundColor: '#C2185B'
+                                            }}
+                                                 aria-valuenow="15"
+                                                 aria-valuemin="0"
+                                                 aria-valuemax="100"
+                                            >
+                                                <small>{this.state.genderRatioFemale}</small>
+                                            </div>
+                                            <div className="progress-bar"
+                                                 role="progressbar"
+                                                 style={{
+                                                     width: `${this.state.genderRatioMale}%`,
+                                                     backgroundColor: '#1976D2'
+                                            }}
+                                                 aria-valuenow="30"
+                                                 aria-valuemin="0"
+                                                 aria-valuemax="100"
+                                            >
+                                                <small>{this.state.genderRatioMale}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="row">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <h6 className="float-end">Egg Groups:</h6>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <h6 className="float-start">{this.state.eggGroups}</h6>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <h6 className="float-end">Hatch Steps:</h6>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <h6 className="float-start">{this.state.hatchSteps}</h6>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <h6 className="float-end">Abilities:</h6>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <h6 className="float-start">{this.state.abilities}</h6>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <h6 className="float-end">EVs:</h6>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <h6 className="float-start">{this.state.evs}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card-footer text-muted">
+                            Data from: <a href='https://pokeapi.co/' target="_blank" className="card-link">PokeAPI.co</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
