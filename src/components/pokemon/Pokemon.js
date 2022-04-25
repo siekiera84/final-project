@@ -204,10 +204,10 @@ export default class Pokemon extends Component {
                                               style={{backgroundColor: `#${TYPE_COLORS[type]}`,color: 'white'}}
                                         >
                                             {type
-                                            .toLowerCase()
-                                            .split(' ')
-                                            .map(s => s.charAt(0).toUpperCase() +s.substring(1))
-                                            .join(' ')}
+                                                .toLowerCase()
+                                                .split(' ')
+                                                .map(s => s.charAt(0).toUpperCase() +s.substring(1))
+                                                .join(' ')}
                                         </span>
                                     ))}
                                 </div>
@@ -236,9 +236,9 @@ export default class Pokemon extends Component {
                                                 backgroundColor: "#95DD65",
                                                 width: `${this.state.stats.hp}%`
                                             }}
-                                            aria-valuenow="25"
-                                            aria-valuemin="0"
-                                            aria-valuemax="100">
+                                                 aria-valuenow="25"
+                                                 aria-valuemin="0"
+                                                 aria-valuemax="100">
                                                 <small>{this.state.stats.hp}</small>
                                             </div>
                                         </div>
@@ -372,7 +372,7 @@ export default class Pokemon extends Component {
                                                  style={{
                                                      width: `${this.state.genderRatioFemale}%`,
                                                      backgroundColor: '#C2185B'
-                                            }}
+                                                 }}
                                                  aria-valuenow="15"
                                                  aria-valuemin="0"
                                                  aria-valuemax="100"
@@ -384,7 +384,7 @@ export default class Pokemon extends Component {
                                                  style={{
                                                      width: `${this.state.genderRatioMale}%`,
                                                      backgroundColor: '#1976D2'
-                                            }}
+                                                 }}
                                                  aria-valuenow="30"
                                                  aria-valuemin="0"
                                                  aria-valuemax="100"

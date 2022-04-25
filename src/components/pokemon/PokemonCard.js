@@ -61,7 +61,7 @@ export default class PokemonCard extends Component {
     render() {
 
         return (
-            <div className='col-md-3 col-sm-6 mb-5'>
+            <div className='col-md-3 col-sm-6 mb-3 mt-3'>
                 <StyledLink to={`/pokemon/${this.state.pokemonIndex}`}>
                     <Card className="card">
                         <h5 className="card-header">#{this.state.pokemonIndex}</h5>
@@ -80,7 +80,7 @@ export default class PokemonCard extends Component {
                         />
                         {/*to ma zwrócić jeśli nie będzie się ładować*/}
                         {this.state.toManyRequests ? (<h6 className="mx-auto">
-                            <span className="badge badge-danger mt-2">Too many requests!</span> c
+                            <span className="badge badge-danger mt-2">Too many requests!</span>
                         </h6>) : null}
                         <div className="card-body mx-auto">
                             <h6 className="card-title">
